@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Character Customization</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+  
+</head>
+<body>
+  <div class="Home">
+    <div class="landing-page">
+            <h1>Welcome to the Game</h1>
+            <button id="startButton">Customize Characters</button>
+    </div>
+
+    <div class="container">
+        <div class="character">
+        <h2>Customize Water Girl</h2>
+        <div id="character1-canva"></div>
+        <input type="color" id="colorPicker1" value="#20D5D5">
+        </div>
+        <div class="character">
+        <h2>Customize Fire Boy</h2>
+        <div id="character2-canva"></div>
+        <input type="color" id="colorPicker2" value="#E60000">
+        </div>
+        <div class="fireBall">
+        <img src="../assets/fireball.png" class="falling-obj-1" id="falling1"></img>
+        <img src="../assets/fireball.png" class="falling-obj-2" id="falling2"></img>
+        </div>
+        <div class="waterBall">
+        <img src="../assets/waterball.png" class="falling-obj-3" id="falling3"></img>
+        <img src="../assets/waterball.png" class="falling-obj-4" id="falling4"></img>
+        </div>
+    </div>
+  </div>
+  <script src="landing.js"></script>
+  <script src="character1.js" defer></script>
+  <script src="character2.js" defer></script>
+</body>
+</html>
