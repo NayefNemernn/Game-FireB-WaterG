@@ -186,3 +186,42 @@ function update ()
   }
 
 }
+function collectdiamond (player, diamond)
+{
+  diamond.disableBody(true, true);
+
+  //  Add and update the score
+  score += 10;
+  scoreText.setText('Score: ' + score);
+
+  if (diamonds.countActive(true) === 0)
+  {
+      //  A new batch of diamonds to collect
+      diamonds.children.iterate(function (child) {
+
+          child.enableBody(true, child.x, 0, true, true);
+
+      });
+
+      var x = (player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);// if else
+
+      var bomb = bombs.create(x, 16, 'bomb');
+      bomb.setBounce(1);
+      bomb.setCollideWorldBounds(true);
+      bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
+      bomb.allowGravity = false;
+    
+      checkScoreAndNextLevel()
+    }
+}
+
+function hitBomb (player, bomb)
+{
+  this.physics.pause();
+
+  player.setTint(0xff0000);
+
+  player.anims.play('turn');
+
+  gameOver = true;
+}
