@@ -225,3 +225,9 @@ function hitBomb (player, bomb)
 
   gameOver = true;
 }
+function checkScoreAndNextLevel() {
+    if (score >= 500) { 
+        // Redirect to the next level page
+        window.location.href = 'level2.html'; // add level 2 URL 
+    }
+  }
