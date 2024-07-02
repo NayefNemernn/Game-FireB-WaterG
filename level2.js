@@ -32,36 +32,41 @@ function preload() {
   this.load.image("ground", "assets/platform.png");
   this.load.image("diamond", "assets/diamond.png");
   this.load.image("bomb", "assets/bomb.png");
-  this.load.spritesheet("watergirl", "assets/watergirl.png", {
-    frameWidth: 27,
-    frameHeight: 48,
+  this.load.spritesheet("watergirl", "assets/fireboy-character.png", {
+    frameWidth: 40,
+    frameHeight: 60,
   });
-  // this.load.image('bluePlatform', 'assets/bluePlatform.png'); //used in next level
-  // this.load.image('redPlatform', 'assets/redPlatform.png');
+  this.load.image("stone", "assets/stone.png");
+  this.load.image("riverred", "assets/river-red.png");
+  this.load.image("riverblue", "assets/river-blue.png");
+  this.load.image("rivergreen", "assets/green-river.png");
 }
 function create() {
   // Create character watergirl
   this.watergirl = this.physics.add.sprite(100, 450, "watergirl");
 
   // Colliders for the character
-
-  // this.bluePlatforms = this.physics.add.staticGroup();
-  // this.redPlatforms = this.physics.add.staticGroup();
-
-  // this.bluePlatforms.create(400, 568, 'bluePlatform').setScale(2).refreshBody();
-  // this.redPlatforms.create(600, 400, 'redPlatform').setScale(2).refreshBody();
-  // this.bluePlatforms = this.physics.add.staticGroup(); //used in next level
-  // this.redPlatforms = this.physics.add.staticGroup();
+  this.riverred = this.physics.add.staticGroup();
+  this.riverblue = this.physics.add.staticGroup();
+  this.rivergreen = this.physics.add.staticGroup();
+  this.stone = this.physics.add.staticGroup();
 
   //  A simple background for our game
   this.add.image(400, 300, "bg").setScale(3, 1.3);
 
-  // this.bluePlatforms.create(900, 636, 'bluePlatform').setScale(2.5,1).refreshBody();
-  // this.redPlatforms.create(600, 636, 'redPlatform').setScale(2.5,0.3).refreshBody();
+  this.stone.create(1422, 615, "stone").setScale(1, 1.3).refreshBody();
+  this.riverred.create(622, 700, "riverred").setScale(0.5, 0.5).refreshBody();
+  this.rivergreen
+    .create(950, 470, "rivergreen")
+    .setScale(0.5, 0.5)
+    .refreshBody();
+  this.riverblue.create(900, 700, "riverblue").setScale(0.5, 0.5).refreshBody();
+  this.stone.setDepth(4);
+  this.riverred.setDepth(4);
+  this.riverblue.setDepth(4);
+  this.rivergreen.setDepth(4);
   //set depth for blue
-  //     this.bluePlatforms.setDepth(4);
-  //     //set depth for red
-  //     this.redPlatforms.setDepth(3);
+
   // //
 
   //  The platforms group contains the ground and the 2 ledges we can jump on
@@ -69,17 +74,31 @@ function create() {
 
   //  Here we create the ground.
   //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
-  platforms.create(400, 670, "ground").setScale(6, 0.5).refreshBody();
-  platforms.create(800, 0, "ground").setScale(6, 0.8).refreshBody();
+  platforms.create(300, 710, "ground").setScale(6, 0.5).refreshBody();
+  platforms.create(800, 10, "ground").setScale(6, 0.8).refreshBody();
   // create wall-right
-  platforms.create(1505, 320, "ground").setScale(0.05, 14).refreshBody();
+  platforms.create(1515, 320, "ground").setScale(0.05, 14).refreshBody();
   // create wall-left
-  platforms.create(10, 320, "ground").setScale(0.05, 14).refreshBody();
+  platforms.create(20, 320, "ground").setScale(0.05, 14).refreshBody();
+
   // create ledges
-  platforms.create(600, 450, "ground").setScale(1.5, 0.5).refreshBody(); //buttom long ledge
-  platforms.create(30, 300, "ground").setScale(0.2, 0.3).refreshBody(); // small left ledge
-  platforms.create(1500, 550, "ground").setScale(0.2, 0.3).refreshBody(); // small right ledge
+  platforms.create(180, 400, "ground").setScale(1, 0.5).refreshBody(); //in the center
+
+  platforms.create(20, 580, "ground").setScale(0.7, 0.5).refreshBody(); //wall under character-girl
+  platforms
+    .create(680, 440, "ground")
+    .setScale(0.25, 0.5)
+    .setAngle(25)
+    .refreshBody();
+
+  platforms.create(970, 480, "ground").setScale(0.5, 0.5).refreshBody(); //in the center 2nd
+  //buttom long ledge
+
   platforms.create(895, 220, "ground").setScale(1.43, 0.5).refreshBody(); //top long ledge
+
+  platforms.create(100, 380, "ground").setScale(0.3, 0.3).refreshBody();
+
+  platforms.create(370, 380, "ground").setScale(0.05, 0.2).refreshBody(); //click 2osonser 1
 
   // The player and its settings
   player = this.physics.add.sprite(50, 450, "watergirl");
@@ -91,20 +110,20 @@ function create() {
   //  Our player animations, turning, walking left and walking right.
   this.anims.create({
     key: "left",
-    frames: this.anims.generateFrameNumbers("watergirl", { start: 0, end: 2 }),
+    frames: this.anims.generateFrameNumbers("watergirl", { start: 1, end: 0 }),
     frameRate: 15,
     repeat: -1,
   });
 
   this.anims.create({
     key: "turn",
-    frames: [{ key: "watergirl", frame: 4 }],
+    frames: [{ key: "watergirl", frame: 2 }],
     frameRate: 20,
   });
 
   this.anims.create({
     key: "right",
-    frames: this.anims.generateFrameNumbers("watergirl", { start: 0, end: 2 }),
+    frames: this.anims.generateFrameNumbers("watergirl", { start: 1, end: 2 }),
     frameRate: 10,
     repeat: -1,
   });
@@ -139,9 +158,11 @@ function create() {
   this.physics.add.collider(player, platforms);
   this.physics.add.collider(diamonds, platforms);
   this.physics.add.collider(bombs, platforms);
-  // this.physics.add.collider(player, this.bluePlatforms);//used in next level
+  this.physics.add.collider(player, this.bluePlatforms); //used in next level
   // this.physics.add.collider(player, this.redPlatforms);
-
+  this.physics.add.collider(player, this.riverblue);
+  this.physics.add.collider(player, this.riverred);
+  this.physics.add.collider(player, this.stone);
   //  Checks to see if the player overlaps with any of the diamonds, if he does call the collectdiamond function
   this.physics.add.overlap(player, diamonds, collectdiamond, null, this);
   this.physics.add.collider(player, bombs, hitBomb, null, this);
