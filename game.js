@@ -33,7 +33,7 @@ function preload ()
   this.load.image('ground', 'assets/platform.png');
   this.load.image('diamond', 'assets/diamond.png');
   this.load.image('bomb', 'assets/bomb.png');
-  this.load.spritesheet('watergirl', 'assets/watergirl.png', { frameWidth: 27, frameHeight: 48 });
+  this.load.spritesheet('watergirl', 'assets/watergirl.png', { frameWidth: 300, frameHeight: 600 });
   // this.load.image('bluePlatform', 'assets/bluePlatform.png'); //used in next level
   // this.load.image('redPlatform', 'assets/redPlatform.png');
 }
@@ -43,7 +43,7 @@ function create ()
 
 
     // Create character watergirl
-    this.watergirl = this.physics.add.sprite(100, 450, 'watergirl');
+    this.watergirl = this.physics.add.sprite(100, 450, 'watergirl')
 
     // Colliders for the character
     
@@ -89,7 +89,12 @@ function create ()
   platforms.create(895, 220, 'ground').setScale(1.43,0.5).refreshBody();//top long ledge
 
   // The player and its settings
-  player = this.physics.add.sprite(50, 450, 'watergirl');
+  player = this.physics.add.sprite(50, 450, 'watergirl').setScale(0.2).refreshBody();
+  const originalWidth = player.width;
+  const originalHeight = player.height;
+  player.setCrop(0, originalHeight / 2, originalWidth, originalHeight / 2).refreshBody();
+
+  // player.setDisplaySize(20, 80);
 
   //  Player physics properties. Give the little guy a slight bounce.
   player.setBounce(0.2);
@@ -226,8 +231,8 @@ function hitBomb (player, bomb)
   gameOver = true;
 }
 function checkScoreAndNextLevel() {
-    if (score >= 500) { 
-        // Redirect to the next level page
-        window.location.href = 'level2.html'; // add level 2 URL 
-    }
+  if (score >= 500) { 
+      // Redirect to the next level page
+      window.location.href = 'level2.html'; // add level 2 URL 
   }
+}
