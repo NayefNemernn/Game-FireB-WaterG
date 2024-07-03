@@ -266,7 +266,7 @@ function createCharacter3 (x,y) {
 }
 
 function saveCharacter() {
-  saveCanvas('character', 'png');
+  saveCanvas('watergirl', 'png');
 }
 
 
