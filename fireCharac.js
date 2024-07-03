@@ -12,31 +12,31 @@ const sketch2 = (p) => {
     drawCharacter(p.width / 2, p.height / 2 - 25); // Initial drawing with default position (center of canvas)
 
     document
-      .getElementById("waterBodyColor2")
+      .getElementById("fireBodyColor2")
       .addEventListener("input", (event) => {
         bodyColor = event.target.value;
         drawCharacter(p.width / 2, p.height / 2); // Redraw with default position
       });
     document
-      .getElementById("waterHairColor2")
+      .getElementById("fireHairColor2")
       .addEventListener("input", (event) => {
         hairColor = event.target.value;
         drawCharacter(p.width / 2, p.height / 2); // Redraw with default position
       });
     document
-      .getElementById("waterBodyWidth2")
+      .getElementById("fireBodyWidth2")
       .addEventListener("input", (event) => {
         bodyWidth = parseInt(event.target.value);
         drawCharacter(p.width / 2, p.height / 2); // Redraw with default position
       });
     document
-      .getElementById("waterArmShape2")
+      .getElementById("fireArmShape2")
       .addEventListener("change", (event) => {
         armShape = event.target.value;
         drawCharacter(p.width / 2, p.height / 2); // Redraw with default position
       });
     document
-      .getElementById("waterLegShape2")
+      .getElementById("fireLegShape2")
       .addEventListener("change", (event) => {
         legShape = event.target.value;
         drawCharacter(p.width / 2, p.height / 2); // Redraw with default position

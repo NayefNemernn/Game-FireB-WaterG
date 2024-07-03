@@ -12,7 +12,7 @@ const sketch1 = (p) => {
       drawCharacter(100, 100); // Initial drawing with default position (200, 200)
   
       
-      document.getElementById('waterBodyColor').addEventListener('input', (event) => {
+      document.getElementById('waterBodyColor1').addEventListener('input', (event) => {
         bodyColor = event.target.value;
         drawCharacter(100, 100); // Redraw with default position
       });
