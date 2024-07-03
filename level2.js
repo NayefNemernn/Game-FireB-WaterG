@@ -33,8 +33,8 @@ function preload() {
   this.load.image("diamond", "assets/diamond.png");
   this.load.image("bomb", "assets/bomb.png");
   this.load.spritesheet("watergirl", "assets/fireboy-character.png", {
-    frameWidth: 40,
-    frameHeight: 60,
+    frameWidth: 60,
+    frameHeight: 69,
   });
   this.load.image("stone", "assets/stone.png");
   this.load.image("riverred", "assets/river-red.png");
@@ -123,7 +123,7 @@ function create() {
 
   this.anims.create({
     key: "right",
-    frames: this.anims.generateFrameNumbers("watergirl", { start: 1, end: 2 }),
+    frames: this.anims.generateFrameNumbers("watergirl", { start: 3, end: 4 }),
     frameRate: 10,
     repeat: -1,
   });
