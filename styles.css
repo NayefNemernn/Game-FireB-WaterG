@@ -13,7 +13,7 @@ body{
 .landing-page {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     height: 130vh;
     text-align: center;
@@ -22,6 +22,7 @@ body{
     background-size: cover;
     background-position:center;
     background-image: url('assets/background2.png');
+    z-index: -3;
 }
 
 .landing-page> h1{
@@ -43,21 +44,24 @@ body{
     border-radius: 20px;
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
+
 h2 {
     color: #FEF2BF;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
+
 .container {
     display: flex;
     flex-flow: row wrap;
     width: 100vw;
     height: 70vh;
-    justify-content: space-evenly;
+    justify-content: center;
     margin: 0px;
     background-color: #633a3a;
 }
+
 .falling-obj-1 {
     position:absolute;
     top: -50px;
@@ -79,6 +83,7 @@ h2 {
     transform: translateX(-20%);
     overflow: hidden;
 }
+
 .falling-obj-3 {
     position:absolute;
     top: -30px;
@@ -89,6 +94,7 @@ h2 {
     transform: translateX(-20%);
     overflow: hidden;
 }
+
 .falling-obj-4 {
     position:absolute;
     top: -50px;
@@ -99,15 +105,23 @@ h2 {
     transform: translateX(-20%);
     overflow: hidden;
 }
+
 .character {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     width: 100vw;
+    z-index: 20;
 }   
 
 input[type="color"] {
-    width: 100px;
+    width: 200px;
     height: 40px;
     cursor: pointer;
+}
+
+#character1-canva {
+    background-color: #FEF2BF;
+    z-index: 10;
 }

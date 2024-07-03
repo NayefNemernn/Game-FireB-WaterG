@@ -5,20 +5,29 @@
   <title>Character Customization</title>
   <link rel="stylesheet" href="styles.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
-  
 </head>
 <body>
   <div class="Home">
     <div class="landing-page">
-            <h1>Welcome to the Game</h1>
-            <button id="startButton">Customize Characters</button>
+        <h1>Welcome to the Game</h1>
+        <button id="startButton">Customize Characters</button>
     </div>
 
     <div class="container">
         <div class="character">
-        <h2>Customize Water Girl</h2>
-        <div id="character1-canva"></div>
-        <input type="color" id="colorPicker1" value="#20D5D5">
+          <h2>Customize Water Girl</h2>
+          <div id="character1-canva"></div>
+          <input type="color" id="waterBodyColor" value="#20D5D5"> 
+          <input type="color" id="waterHairColor" value="#20D5D5"> 
+          <input type="range" id="waterBodyWidth" min="10" max="40" value="20">
+          <select id="waterArmShape"> 
+            <option value="ellipse">Ellipse</option>
+            <option value="rectangle">Rectangle</option>
+          </select>
+          <select id="waterLegShape"> 
+            <option value="ellipse">Ellipse</option>
+            <option value="rectangle">Rectangle</option>
+          </select>
         </div>
         <div class="character">
         <h2>Customize Fire Boy</h2>
@@ -36,7 +45,10 @@
     </div>
   </div>
   <script src="landing.js"></script>
-  <script src="character1.js" defer></script>
-  <script src="character2.js" defer></script>
+  <script src="waterGirl.html"></script>
+  <script src="waterCharac.js" ></script>
+  <script src="p5.min.js"></script>
+  
+  <!-- <script src="fireCharac.js" defer></script> -->
 </body>
 </html>

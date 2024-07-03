@@ -3,6 +3,7 @@ document.getElementById('startButton').addEventListener('click', () => {
     top: document.querySelector('.container').offsetTop,
     behavior: 'smooth'
     });
+    document.querySelector('.container').style.display = 'block';
 });
 
 
