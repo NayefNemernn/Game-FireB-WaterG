@@ -6,7 +6,7 @@ const sketch1 = (p) => {
     let legShape = 'ellipse';
   
     p.setup = () => {
-      let canvas = p.createCanvas(400, 400);
+      let canvas = p.createCanvas(390, 270);
       canvas.parent('character1-canva'); // Set parent element ID
       p.noLoop();
       drawCharacter(100, 100); // Initial drawing with default position (200, 200)
@@ -110,3 +110,54 @@ const sketch1 = (p) => {
 };
   
   new p5(sketch1);
+
+function saveCustomization() {
+    // Create an object to store customization data
+    let customizationData = {
+        bodyColor: waterBodyColor,
+        hairColor: waterHairColor,
+        bodyWidth: waterBodyWidth,
+        armShape: waterArmShape,
+        legShape: waterLegShape
+    };
+
+    // Convert the object to a JSON string
+    let customizationJSON = JSON.stringify(customizationData);
+
+    // Store the JSON string in localStorage under a key (e.g., 'waterGirlCustomization')
+    localStorage.setItem('waterGirlCustomization', customizationJSON);
+
+    // Optionally, you can provide feedback to the user that customization has been saved
+    alert('Customization saved successfully!');
+    window.location.href = 'index.html'; // Update this with the actual URL of level 1
+}
+
+    // Attach the saveCustomization function to a save button
+    document.getElementById('saveButton').addEventListener('click', saveCustomization);
+
+
+function loadCustomization() {
+    let customizationJSON = localStorage.getItem('waterGirlCustomization');
+    if (customizationJSON) {
+        let customizationData = JSON.parse(customizationJSON);
+
+        waterBodyColor = customizationData.bodyColor;
+        waterHairColor = customizationData.hairColor;
+        waterBodyWidth = customizationData.bodyWidth;
+        waterArmShape = customizationData.armShape;
+        waterLegShape = customizationData.legShape;
+
+        // Update UI elements based on retrieved data
+        document.getElementById('waterBodyColor').value = waterBodyColor;
+        document.getElementById('waterHairColor').value = waterHairColor;
+        document.getElementById('waterBodyWidth').value = waterBodyWidth;
+        document.getElementById('waterArmShape').value = waterArmShape;
+        document.getElementById('waterLegShape').value = waterLegShape;
+
+        // // Example: Update character display based on retrieved data
+        // drawCharacter(waterBodyColor, waterHairColor, waterBodyWidth, waterArmShape, waterLegShape);
+    }
+}
+
+// Load customization data when the page is loaded
+window.onload = loadCustomization;
