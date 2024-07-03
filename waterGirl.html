@@ -1,54 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WaterGirl Creation</title>
-  <style>
-    body {
-      padding: 40;
-      margin: 70;
-      background-color: blanchedalmond;
-    }
-    .controls {
-      position: relative;
-      padding: 10px;
-      margin: 15px;
-      z-index: 10;
-      display: flex;
-      flex-flow: row wrap;
-      justify-content: space-evenly;
-      align-items: center;
-      align-content: space-evenly;
-    }
-  </style>
-</head>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WaterGirl Creation</title>
+    <style>
+      body {
+        padding: 40;
+        margin: 70;
+        background-color: blanchedalmond;
+      }
+      .controls {
+        position: relative;
+        padding: 10px;
+        margin: 15px;
+        z-index: 10;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-evenly;
+        align-items: center;
+        align-content: space-evenly;
+      }
+    </style>
+  </head>
 
-<body>
-  <div class="controls">
-    <label for="bodyColor"> Body Color:</label>
-    <input type="color" id="bodyColor" value="#12d9cf">
-    <br>
-    <lable for="hairColor">Hair Color:</lable>
-    <input type="color" id="hairColor" value="#79443b">
-    <br>
-    <label for="bodyWidth">Body Width:</label>
-    <input type="range" id="bodyWidth" min="10" max="40" value="20">
-    <br>
-    <label for="armShape">Arm Shape:</label>
-    <select id="armShape">
-      <option value="ellipse">Ellipse</option>
-      <option value="rectangle">Rectangle</option>
-    </select> 
-    <label for="legShape">Leg Shape:</label>
-    <select id="legShape">
-      <option value="ellipse">Ellipse</option>
-      <option value="rectangle">Rectangle</option>
-    </select> 
-  </div>
-  <script src="p5.min.js"></script>
-  
-  <script src="characters/watergirl.js"></script>
-  
-</body>
+  <body>
+    <div class="controls">
+      <label for="bodyColor"> Body Color:</label>
+      <input type="color" id="bodyColor" value="#12d9cf" />
+      <br />
+      <lable for="hairColor">Hair Color:</lable>
+      <input type="color" id="hairColor" value="#79443b" />
+      <br />
+      <label for="bodyWidth">Body Width:</label>
+      <input type="range" id="bodyWidth" min="10" max="40" value="20" />
+      <br />
+      <label for="armShape">Arm Shape:</label>
+      <select id="armShape">
+        <option value="ellipse">Ellipse</option>
+        <option value="rectangle">Rectangle</option>
+      </select>
+      <label for="legShape">Leg Shape:</label>
+      <select id="legShape">
+        <option value="ellipse">Ellipse</option>
+        <option value="rectangle">Rectangle</option>
+      </select>
+    </div>
+    <script src="p5.min.js"></script>
+
+    <script src="characters/watergirl.js"></script>
+  </body>
 </html>

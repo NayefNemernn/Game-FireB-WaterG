@@ -1,9 +1,9 @@
 document.getElementById('startButton').addEventListener('click', () => {
     window.scrollTo({
-    top: document.querySelector('.container').offsetTop,
+    top: document.querySelector('.section-container').offsetTop,
     behavior: 'smooth'
     });
-    document.querySelector('.container').style.display = 'block';
+    document.querySelector(".section-container").style.display = "block";
 });
 
 
