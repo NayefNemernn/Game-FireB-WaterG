@@ -26,6 +26,14 @@ var gameOver = false;
 var scoreText;
 
 var game = new Phaser.Game(config);
+  
+function preload ()
+{
+  this.load.image('bg', 'assets/bg.png');
+  this.load.image('ground', 'assets/platform.png');
+  this.load.image('diamond', 'assets/diamond.png');
+  this.load.image('bomb', 'assets/bomb.png');
+  this.load.spritesheet('watergirl', 'assets/watergirl.png', { frameWidth: 300, frameHeight: 600 });
 
 function preload() {
   this.load.image("bg", "assets/bg.png");
@@ -82,6 +90,12 @@ function create() {
   platforms.create(895, 220, "ground").setScale(1.43, 0.5).refreshBody(); //top long ledge
 
   // The player and its settings
+  player = this.physics.add.sprite(50, 450, 'watergirl').setScale(0.2).refreshBody();
+  const originalWidth = player.width;
+  const originalHeight = player.height;
+  player.setCrop(0, originalHeight / 2, originalWidth, originalHeight / 2).refreshBody();
+
+  // player.setDisplaySize(20, 80);
   player = this.physics.add.sprite(50, 450, "watergirl");
 
   //  Player physics properties. Give the little guy a slight bounce.

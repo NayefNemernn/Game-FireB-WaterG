@@ -1,19 +1,18 @@
 const sketch1 = (p) => {
-  let bodyColor = "#20D5D5";
-  let hairColor = "#79443b";
-  let bodyWidth = 20;
-  let armShape = "ellipse";
-  let legShape = "ellipse";
-
-  p.setup = () => {
-    let canvas = p.createCanvas(400, 400);
-    canvas.parent("character1-canva"); // Set parent element ID
-    p.noLoop();
-    drawCharacter(100, 100); // Initial drawing with default position (200, 200)
-
-    document
-      .getElementById("waterBodyColor1")
-      .addEventListener("input", (event) => {
+    let bodyColor = '#20D5D5';
+    let hairColor = '#79443b';
+    let bodyWidth = 20;
+    let armShape = 'ellipse';
+    let legShape = 'ellipse';
+  
+    p.setup = () => {
+      let canvas = p.createCanvas(400, 400);
+      canvas.parent('character1-canva'); // Set parent element ID
+      p.noLoop();
+      drawCharacter(100, 100); // Initial drawing with default position (200, 200)
+  
+      
+      document.getElementById('waterBodyColor').addEventListener('input', (event) => {
         bodyColor = event.target.value;
         drawCharacter(100, 100); // Redraw with default position
       });
@@ -131,5 +130,5 @@ const sketch1 = (p) => {
     p.arc(x + 100, y + 60, 20, 10, 0, p.PI);
   }
 };
-
-new p5(sketch1);
+  
+  new p5(sketch1);
