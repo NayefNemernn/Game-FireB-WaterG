@@ -41,6 +41,12 @@ function preload() {
   this.load.image("rivergreen", "assets/green-river.png");
 
   // Retrieve character image URL from local storage
+
+  this.load.spritesheet("watergirl", "assets/fireboy-character.png", {
+    frameWidth: 60,
+    frameHeight: 69,
+  });
+
   let characterImageURL = localStorage.getItem("savedCharacter");
   console.log("characterImageURL", characterImageURL);
 
@@ -62,7 +68,6 @@ function preload() {
 
 function create() {
   // Create character fireboy
-  this.fireboy = this.physics.add.sprite(100, 450, "fireboy");
 
   // Colliders for the character
   this.riverred = this.physics.add.staticGroup();
@@ -75,11 +80,17 @@ function create() {
 
   this.stone.create(1422, 615, "stone").setScale(1, 1.3).refreshBody();
   this.riverred.create(622, 690, "riverred").setScale(0.5, 0.5).refreshBody();
-  this.rivergreen.create(950, 470, "rivergreen").setScale(0.5, 0.5).refreshBody();
+  this.rivergreen
+    .create(950, 470, "rivergreen")
+    .setScale(0.5, 0.5)
+    .refreshBody();
   this.riverblue.create(900, 690, "riverblue").setScale(0.5, 0.5).refreshBody();
   this.riverblue.create(600, 209, "riverred").setScale(0.5, 0.5).refreshBody();
   this.riverblue.create(650, 428, "riverred").setScale(0.5, 0.5).refreshBody();
-  this.riverblue.create(300, 380, "rivergreen").setScale(0.5, 0.5).refreshBody();
+  this.riverblue
+    .create(300, 380, "rivergreen")
+    .setScale(0.5, 0.5)
+    .refreshBody();
   this.riverblue.create(900, 209, "riverblue").setScale(0.5, 0.5).refreshBody();
   this.stone.setDepth(4);
   this.riverred.setDepth(4);
@@ -91,7 +102,7 @@ function create() {
 
   // Here we create the ground.
   // Scale it to fit the width of the game (the original sprite is 400x32 in size)
-  platforms.create(300, 710, "ground").setScale(6,0.7).refreshBody();
+  platforms.create(300, 710, "ground").setScale(6, 0.7).refreshBody();
   platforms.create(800, 10, "ground").setScale(6, 0.8).refreshBody();
   // create wall-right
   platforms.create(1515, 320, "ground").setScale(0.05, 14).refreshBody();
@@ -109,8 +120,8 @@ function create() {
   platforms.create(370, 380, "box").setScale(0.05, 0.2).refreshBody(); // click 2osonser 1
 
   // The player and its settings
-  player = this.physics.add.sprite(50, 450, "fireboy");
-
+  player = this.physics.add.sprite(50, 450, "watergirl");
+  player1 = this.physics.add.sprite(50, 450, "fireboy");
   // Player physics properties. Give the little guy a slight bounce.
   player.setBounce(0.2);
   player.setCollideWorldBounds(true); // to prevent exit canvas walls
@@ -150,7 +161,10 @@ function create() {
 
   diamonds.children.iterate(function (child) {
     // Give each diamond a slightly different bounce
-    child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8)).setScale(0.1).refreshBody();
+    child
+      .setBounceY(Phaser.Math.FloatBetween(0.4, 0.8))
+      .setScale(0.1)
+      .refreshBody();
   });
 
   bombs = this.physics.add.group();
@@ -164,14 +178,16 @@ function create() {
   cursors1 = this.input.keyboard.addKeys({
     up: Phaser.Input.Keyboard.KeyCodes.W,
     left: Phaser.Input.Keyboard.KeyCodes.A,
-    right: Phaser.Input.Keyboard.KeyCodes.D
-});
+    right: Phaser.Input.Keyboard.KeyCodes.D,
+  });
 
   // Collide the player and the diamonds with the platforms
   this.physics.add.collider(player, platforms);
   this.physics.add.collider(player1, platforms);
-  this.physics.add.collider(player, box);
-  this.physics.add.collider(player1, box);
+  // this.physics.add.collider(player, box);
+  // this.physics.add.collider(player1, box);
+  this.physics.add.collider(player, this.ground);
+  this.physics.add.collider(player1, this.ground);
   this.physics.add.collider(diamonds, platforms);
   this.physics.add.collider(bombs, platforms);
   this.physics.add.collider(player, this.bluePlatforms); // used in next level
@@ -213,22 +229,22 @@ function update() {
     player.setVelocityY(-330);
   }
 
-/////////////////////////////////////////////////////////
-if (cursors1.left.isDown) {
-  player1.setVelocityX(-160);
-  player1.anims.play('left', true);
-} else if (cursors1.right.isDown) {
-  player1.setVelocityX(160);
-  player1.anims.play('right', true);
-} else {
-  player1.setVelocityX(0);
-  player1.anims.play('turn');
-}
+  /////////////////////////////////////////////////////////
+  if (cursors1.left.isDown) {
+    player1.setVelocityX(-160);
+    player1.anims.play("left", true);
+  } else if (cursors1.right.isDown) {
+    player1.setVelocityX(160);
+    player1.anims.play("right", true);
+  } else {
+    player1.setVelocityX(0);
+    player1.anims.play("turn");
+  }
 
-if (cursors1.up.isDown && player1.body.touching.down) {
-  player1.setVelocityY(-330);
-}
-/////////////////////////////////////////////////////////
+  if (cursors1.up.isDown && player1.body.touching.down) {
+    player1.setVelocityY(-330);
+  }
+  /////////////////////////////////////////////////////////
 }
 
 function collectdiamond(player, diamond) {
@@ -244,7 +260,10 @@ function collectdiamond(player, diamond) {
       child.enableBody(true, child.x, 0, true, true);
     });
 
-    var x = player.x < 400 ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400); // if else
+    var x =
+      player.x < 400
+        ? Phaser.Math.Between(400, 800)
+        : Phaser.Math.Between(0, 400); // if else
 
     var bomb = bombs.create(x, 16, "bomb");
     bomb.setBounce(1);
@@ -263,8 +282,7 @@ function hitBomb(player, bomb) {
   gameOver = true;
 }
 
-
-function hitRiverBlue(player, riverblue, riverred,rivergreen) {
+function hitRiverBlue(player, riverblue, riverred, rivergreen) {
   this.physics.pause();
   player.setTint(0x0000ff); // change color to blue to indicate losing
   player.anims.play("turn");

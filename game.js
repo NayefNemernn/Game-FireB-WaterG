@@ -26,25 +26,44 @@ var score = 0;
 var gameOver = false;
 var scoreText;
 
-
 var game = new Phaser.Game(config);
-  
-function preload (){
-  this.load.image('bg', 'assets/bg.png');
-  this.load.image('ground', 'assets/platform.png');
-  this.load.image('diamond', 'assets/diamond.png');
-  this.load.image('bomb', 'assets/bomb.png');
-  this.load.spritesheet('watergirl', 'assets/watergirl.png', { frameWidth: 31, frameHeight: 46 });
-  this.load.spritesheet('fireboy', 'assets/fireboy.png', { frameWidth: 31, frameHeight: 46 });
 
+function preload() {
+  this.load.image("bg", "assets/bg.png");
+  this.load.image("ground", "assets/platform.png");
+  this.load.image("diamond", "assets/diamond.png");
+  this.load.image("bomb", "assets/bomb.png");
+  this.load.spritesheet("watergirl", "assets/watergirl.png", {
+    frameWidth: 31,
+    frameHeight: 46,
+  });
+
+  let characterImageURL = localStorage.getItem("savedCharacter");
+
+  console.log("characterImageURL", characterImageURL);
+
+  // Check if a character image URL was retrieved
+  if (characterImageURL) {
+    // Load spritesheet using retrieved URL
+    this.load.spritesheet("fireboy", characterImageURL, {
+      frameWidth: 40,
+      frameHeight: 48,
+    });
+  } else {
+    // Fallback or default loading if no image is found in local storage
+    this.load.spritesheet("fireboy", "assets/fireboy-character.png", {
+      frameWidth: 60,
+      frameHeight: 69,
+    });
+  }
 
   // this.load.image('bluePlatform', 'assets/bluePlatform.png'); //used in next level
   // this.load.image('redPlatform', 'assets/redPlatform.png');
 }
 function create() {
   // Create character watergirl
-  this.watergirl = this.physics.add.sprite(100, 450, "watergirl");
-  this.fireboy = this.physics.add.sprite(200, 450, "fireboy");
+  // this.watergirl = this.physics.add.sprite(100, 450, "watergirl");
+  // this.fireboy = this.physics.add.sprite(200, 450, "fireboy");
 
   // Colliders for the character
 
@@ -91,9 +110,9 @@ function create() {
   // player.setCrop(0, originalHeight / 2, originalWidth, originalHeight / 2).refreshBody();
 
   // player.setDisplaySize(20, 80);
-  player = this.physics.add.sprite(50, 450, "watergirl");
-  player1 = this.physics.add.sprite(75, 450, "fireboy");
 
+  player = this.physics.add.sprite(75, 450, "watergirl");
+  player1 = this.physics.add.sprite(75, 450, "fireboy");
   //  Player physics properties. Give the little guy a slight bounce.
   player.setBounce(0.2);
   player.setCollideWorldBounds(true); //to prevent exit canvas walls
@@ -142,36 +161,39 @@ function create() {
   bombs = this.physics.add.group();
 
   //  The score
-  scoreText = this.add.text(28, 4, "score: 0", {fontSize: "25px",fill: "white"});
+  scoreText = this.add.text(28, 4, "score: 0", {
+    fontSize: "25px",
+    fill: "white",
+  });
 
   //////////////////////////////////////////////////////////////////////////////////////////////
   cursors1 = this.input.keyboard.addKeys({
     up: Phaser.Input.Keyboard.KeyCodes.W,
     left: Phaser.Input.Keyboard.KeyCodes.A,
-    right: Phaser.Input.Keyboard.KeyCodes.D
-});
+    right: Phaser.Input.Keyboard.KeyCodes.D,
+  });
 
-// Optional: Adding animations for walking left and right
-this.anims.create({
-    key: 'left',
-    frames: this.anims.generateFrameNumbers('fireboy', { start: 3, end: 4 }),
+  // Optional: Adding animations for walking left and right
+  this.anims.create({
+    key: "left",
+    frames: this.anims.generateFrameNumbers("fireboy", { start: 3, end: 4 }),
     frameRate: 10,
-    repeat: -1
-});
+    repeat: -1,
+  });
 
-this.anims.create({
-    key: 'turn',
-    frames: [{ key: 'fireboy', frame: 2 }],
-    frameRate: 20
-});
+  this.anims.create({
+    key: "turn",
+    frames: [{ key: "fireboy", frame: 2 }],
+    frameRate: 20,
+  });
 
-this.anims.create({
-    key: 'right',
-    frames: this.anims.generateFrameNumbers('fireboy', { start: 1, end: 0 }),
+  this.anims.create({
+    key: "right",
+    frames: this.anims.generateFrameNumbers("fireboy", { start: 1, end: 0 }),
     frameRate: 10,
-    repeat: -1
-});
-/////////////////////////////////////////////////////////////////////////////////////////////////////
+    repeat: -1,
+  });
+  /////////////////////////////////////////////////////////////////////////////////////////////////////
 
   //  Collide the player and the diamonds with the platforms
   this.physics.add.collider(player, platforms);
@@ -211,24 +233,22 @@ function update() {
     player.setVelocityY(-330);
   }
 
+  /////////////////////////////////////////////////////////
+  if (cursors1.left.isDown) {
+    player1.setVelocityX(-160);
+    player1.anims.play("left", true);
+  } else if (cursors1.right.isDown) {
+    player1.setVelocityX(160);
+    player1.anims.play("right", true);
+  } else {
+    player1.setVelocityX(0);
+    player1.anims.play("turn");
+  }
 
-/////////////////////////////////////////////////////////
-if (cursors1.left.isDown) {
-  player1.setVelocityX(-160);
-  player1.anims.play('left', true);
-} else if (cursors1.right.isDown) {
-  player1.setVelocityX(160);
-  player1.anims.play('right', true);
-} else {
-  player1.setVelocityX(0);
-  player1.anims.play('turn');
-}
-
-if (cursors1.up.isDown && player1.body.touching.down) {
-  player1.setVelocityY(-330);
-}
-/////////////////////////////////////////////////////////
-
+  if (cursors1.up.isDown && player1.body.touching.down) {
+    player1.setVelocityY(-330);
+  }
+  /////////////////////////////////////////////////////////
 }
 function collectdiamond(player, diamond) {
   diamond.disableBody(true, true);
@@ -260,7 +280,9 @@ function collectdiamond(player, diamond) {
 
 function displayWinMessage(message) {
   gameOver = true;
-  this.add.text(400, 300, message, { fontSize: '64px', fill: '#fff' }).setOrigin(0.5);
+  this.add
+    .text(400, 300, message, { fontSize: "64px", fill: "#fff" })
+    .setOrigin(0.5);
   this.physics.pause();
 }
 
@@ -275,7 +297,6 @@ function hitBomb(player, bomb) {
 }
 function checkScoreAndNextLevel() {
   if (score >= 500) {
-   
     window.location.href = "level2.html"; // add level 2 URL
   }
 }

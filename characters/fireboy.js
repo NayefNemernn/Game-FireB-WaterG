@@ -337,11 +337,10 @@ function createRunningCharacterBoytoright(x, y) {
 }
 
 function saveCharacter() {
-   let canvas = document.getElementById("defaultCanvas0"); // Replace with your canvas ID
+  let canvas = document.getElementById("defaultCanvas0"); // Replace with your canvas ID
   if (canvas) {
-    let imgData = canvas.toDataURL('image/png');
-    localStorage.setItem('savedCharacter', imgData);
-   } // Save the data URL in local storage
-  window.location.href = "level2.html";
-
+    let imgData = canvas.toDataURL("image/png");
+    localStorage.setItem("savedCharacter", imgData);
+  } // Save the data URL in local storage
+  window.location.href = "index.html";
 }
