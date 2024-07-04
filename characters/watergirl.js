@@ -10,6 +10,9 @@ function setup() {
   saveButton = createButton('Save Character as PNG');
   saveButton.position(0,0);
   saveButton.mousePressed(saveCharacter);
+  document
+    .getElementById("saveButton")
+    .addEventListener("click", saveCharacter);
 
   document.getElementById('bodyColor').addEventListener ('input', (event) => {
     bodyColor= event.target.value;
@@ -422,4 +425,13 @@ function drawLeg (x,y,angle) {
     ellipse(-20,7,10,40)
   }
  pop(); 
+}
+function saveCharacter() {
+  let canvas = document.getElementById("defaultCanvas1"); // Replace with your canvas ID
+ if (canvas) {
+   let imgData = canvas.toDataURL('image/png');
+   localStorage.setItem('savedCharacter', imgData);
+  } // Save the data URL in local storage
+ window.location.href = "index.html";
+
 }
