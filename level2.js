@@ -28,22 +28,39 @@ var scoreText;
 var game = new Phaser.Game(config);
 
 function preload() {
+  // Load other assets as usual
   this.load.image("bg", "assets/bg.png");
   this.load.image("ground", "assets/platform.png");
   this.load.image("diamond", "assets/diamond.png");
   this.load.image("bomb", "assets/bomb.png");
-  this.load.spritesheet("watergirl", "assets/fireboy-character.png", {
-    frameWidth: 60,
-    frameHeight: 69,
-  });
   this.load.image("stone", "assets/stone.png");
   this.load.image("riverred", "assets/river-red.png");
   this.load.image("riverblue", "assets/river-blue.png");
   this.load.image("rivergreen", "assets/green-river.png");
+
+  // Retrieve character image URL from local storage
+  let characterImageURL = localStorage.getItem("savedCharacter");
+  console.log("characterImageURL", characterImageURL);
+
+  // Check if a character image URL was retrieved
+  if (characterImageURL) {
+    // Load spritesheet using retrieved URL
+    this.load.spritesheet("fireboy", characterImageURL, {
+      frameWidth: 40,
+      frameHeight: 48,
+    });
+  } else {
+    // Fallback or default loading if no image is found in local storage
+    this.load.spritesheet("fireboy", "assets/fireboy-character.png", {
+      frameWidth: 60,
+      frameHeight: 69,
+    });
+  }
 }
+
 function create() {
-  // Create character watergirl
-  this.watergirl = this.physics.add.sprite(100, 450, "watergirl");
+  // Create character fireboy
+  this.fireboy = this.physics.add.sprite(100, 450, "fireboy");
 
   // Colliders for the character
   this.riverred = this.physics.add.staticGroup();
@@ -101,7 +118,7 @@ function create() {
   platforms.create(370, 380, "ground").setScale(0.05, 0.2).refreshBody(); //click 2osonser 1
 
   // The player and its settings
-  player = this.physics.add.sprite(50, 450, "watergirl");
+  player = this.physics.add.sprite(50, 450, "fireboy");
 
   //  Player physics properties. Give the little guy a slight bounce.
   player.setBounce(0.2);
@@ -110,20 +127,20 @@ function create() {
   //  Our player animations, turning, walking left and walking right.
   this.anims.create({
     key: "left",
-    frames: this.anims.generateFrameNumbers("watergirl", { start: 1, end: 0 }),
+    frames: this.anims.generateFrameNumbers("fireboy", { start: 1, end: 0 }),
     frameRate: 15,
     repeat: -1,
   });
 
   this.anims.create({
     key: "turn",
-    frames: [{ key: "watergirl", frame: 2 }],
+    frames: [{ key: "fireboy", frame: 2 }],
     frameRate: 20,
   });
 
   this.anims.create({
     key: "right",
-    frames: this.anims.generateFrameNumbers("watergirl", { start: 3, end: 4 }),
+    frames: this.anims.generateFrameNumbers("fireboy", { start: 3, end: 4 }),
     frameRate: 10,
     repeat: -1,
   });

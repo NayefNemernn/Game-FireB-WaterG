@@ -9,7 +9,7 @@ const sketch2 = (p) => {
     let canvas = p.createCanvas(400, 400);
     canvas.parent("character2-canva"); // Set parent element ID
     p.noLoop();
-    drawCharacter(p.width / 2, p.height / 2 - 25); // Initial drawing with default position (center of canvas)
+    drawCharacter(p.width / 2, p.height / 2); // Initial drawing with default position (center of canvas)
 
     document
       .getElementById("fireBodyColor2")

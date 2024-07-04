@@ -27,8 +27,7 @@ var scoreText;
 
 var game = new Phaser.Game(config);
   
-function preload ()
-{
+function preload (){
   this.load.image('bg', 'assets/bg.png');
   this.load.image('ground', 'assets/platform.png');
   this.load.image('diamond', 'assets/diamond.png');
@@ -223,7 +222,7 @@ function hitBomb(player, bomb) {
 }
 function checkScoreAndNextLevel() {
   if (score >= 500) {
-    // Redirect to the next level page
+   
     window.location.href = "level2.html"; // add level 2 URL
   }
 }

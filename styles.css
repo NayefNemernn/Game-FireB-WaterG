@@ -43,10 +43,11 @@ h2 {
 }
 
 .section-container {
-  margin-left: auto;
-  margin-right: auto;
+  display: flex;
+  flex-flow: row wrap;
   width: 100%;
   height: 100vh;
+  justify-content: center;
   margin: 0px;
   background-color: #633a3a;
 }
@@ -55,7 +56,6 @@ canvas#defaultCanvas0 {
   margin-left: auto !important;
   display: block;
   margin-right: auto;
-  background: #fef2bf;
 }
 .changes-charac {
   text-align: center;
@@ -64,7 +64,15 @@ canvas#defaultCanvas1 {
   margin-left: auto !important;
   display: block;
   margin-right: auto;
-  background: #fef2bf;
+}
+canvas#defaultCanvas2 {
+  margin-top: -20px;
+  margin-top: 20px;
+}
+canvas#defaultCanvas2 {
+  margin-left: auto;
+  display: block;
+  margin-right: auto;
 }
 .falling-obj-1 {
   position: absolute;
@@ -117,12 +125,11 @@ canvas#defaultCanvas1 {
 
 .characters {
   display: flex;
-  flex-flow: wrap;
+  flex-wrap: wrap;
+  flex-direction: row;
   width: 70%;
   justify-content: space-between;
-  margin-left: auto;
-  margin-right: auto;
-  padding-top: 80px;
+  margin-top: 80px;
 }
 
 input[type="color"] {
@@ -131,8 +138,12 @@ input[type="color"] {
   cursor: pointer;
 }
 
-#character1-canva {
-  background-color: #fef2bf;
-  z-index: 10;
+#customize-buttons {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin-top: 10px;
 }
-
+canvas#defaultCanvas0 {
+  display: none;
+}
