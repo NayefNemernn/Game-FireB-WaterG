@@ -406,7 +406,10 @@ function createCharacter5(x,y) {
 }
 
 function saveCharacter() {
-  saveCanvas('watergirl', 'png');
+  let canvas = document.getElementById("defaultCanvas1"); // Replace with your canvas ID
+  if (canvas) {
+    let imgData = canvas.toDataURL("image/png");
+    localStorage.setItem("savedCharacter1", imgData);
 }
 
 

@@ -38,14 +38,14 @@ function preload() {
   //   frameHeight: 46,
   // });
 
-  let characterImageURL = localStorage.getItem("savedCharacter");
+  let characterImageURL1 = localStorage.getItem("savedCharacter1");
 
-  console.log("characterImageURL", characterImageURL);
+  console.log("characterImageURL", characterImageURL1);
 
   // Check if a character image URL was retrieved
-  if (characterImageURL) {
+  if (characterImageURL1) {
     // Load spritesheet using retrieved URL
-    this.load.spritesheet("watergirl", characterImageURL, {
+    this.load.spritesheet("watergirl", characterImageURL1, {
       frameWidth: 40,
       frameHeight: 48,
     });
@@ -56,13 +56,13 @@ function preload() {
       frameHeight: 69,
     });
   }
-  let characterImageURL1 = localStorage.getItem("savedCharacter");
+  let characterImageURL = localStorage.getItem("savedCharacter");
 
-  console.log("characterImageURL", characterImageURL1);
+  console.log("characterImageURL", characterImageURL);
 
-  if (characterImageURL1) {
+  if (characterImageURL) {
     // Load spritesheet using retrieved URL
-    this.load.spritesheet("fireboy", characterImageURL1, {
+    this.load.spritesheet("fireboy", characterImageURL, {
       frameWidth: 40,
       frameHeight: 48,
     });
@@ -88,7 +88,7 @@ function create() {
   platforms.create(895, 220, "ground").setScale(1.43, 0.5).refreshBody();
 
   player = this.physics.add.sprite(75, 450, "fireboy");
-  player1 = this.physics.add.sprite(75, 450, "watergirl");
+  player1 = this.physics.add.sprite(75, 450, "watergirl").setScale(0.7);
 
   player.setBounce(0.2);
   player.setCollideWorldBounds(true);
