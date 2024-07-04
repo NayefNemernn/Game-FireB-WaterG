@@ -33,10 +33,10 @@ function preload() {
   this.load.image("ground", "assets/platform.png");
   this.load.image("diamond", "assets/diamond.png");
   this.load.image("bomb", "assets/bomb.png");
-  // this.load.spritesheet("watergirl", "assets/watergirl.png", {
-  //   frameWidth: 31,
-  //   frameHeight: 46,
-  // });
+  this.load.spritesheet("watergirl", "assets/watergirl.png", {
+    frameWidth:   42,
+    frameHeight: 46,
+  });
 
   let characterImageURL1 = localStorage.getItem("savedCharacter1");
 
@@ -88,7 +88,7 @@ function create() {
   platforms.create(895, 220, "ground").setScale(1.43, 0.5).refreshBody();
 
   player = this.physics.add.sprite(75, 450, "fireboy");
-  player1 = this.physics.add.sprite(75, 450, "watergirl").setScale(0.7);
+  player1 = this.physics.add.sprite(100, 450, "watergirl").setScale(1);
 
   player.setBounce(0.2);
   player.setCollideWorldBounds(true);
@@ -110,7 +110,7 @@ function create() {
 
   this.anims.create({
     key: "right",
-    frames: this.anims.generateFrameNumbers("fireboy", { start: 3, end: 4  }),
+    frames: this.anims.generateFrameNumbers("fireboy", { start: 2, end: 3  }),
     frameRate: 10,
     repeat: -1,
   });

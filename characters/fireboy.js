@@ -342,5 +342,5 @@ function saveCharacter() {
     let imgData = canvas.toDataURL("image/png");
     localStorage.setItem("savedCharacter", imgData);
   } // Save the data URL in local storage
-  window.location.href = "index.html";
+  window.location.href = "level1.html";
 }
