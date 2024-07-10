@@ -410,6 +410,7 @@ function saveCharacter() {
   if (canvas) {
     let imgData = canvas.toDataURL("image/png");
     localStorage.setItem("savedCharacter1", imgData);
+  }
 }
 
 
